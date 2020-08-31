@@ -17,13 +17,13 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'byebug'
   gem.add_development_dependency 'couch_potato'
 
-  gem.name = 'omniauth-identity'
+  gem.name = 'omniauth-identity2'
   gem.version = OmniAuth::Identity::VERSION
-  gem.description = %q{Internal authentication handlers for OmniAuth.}
+  gem.description = %q{Internal authentication handlers for OmniAuth. A modern version of the Omniauth Identity strategy.}
   gem.summary = gem.description
-  gem.email = ['michael@intridea.com']
-  gem.homepage = 'http://github.com/intridea/omniauth-identity'
-  gem.authors = ['Michael Bleigh']
+  gem.email = ['andy.roberts.uk@gmail.com']
+  gem.homepage = 'https://github.com/Jellybooks/omniauth-identity2'
+  gem.authors = ['Andrew Roberts', 'Michael Bleigh']
   gem.license     = 'MIT'
   gem.executables = `git ls-files -- bin/*`.split("\n").map{|f| File.basename(f)}
   gem.files = `git ls-files`.split("\n")
