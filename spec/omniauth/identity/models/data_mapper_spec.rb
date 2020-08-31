@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe(OmniAuth::Identity::Models::DataMapper, :db => true) do
   class DataMapperTestIdentity
     include DataMapper::Resource
@@ -9,14 +7,18 @@ describe(OmniAuth::Identity::Models::DataMapper, :db => true) do
     auth_key :ham_sandwich
   end
 
-  DataMapper.finalize
 
   before :all do
+    DataMapper.finalize
     @resource = DataMapperTestIdentity.new
   end
 
-  it 'should delegate locate to the all query method' do
-    DataMapperTestIdentity.should_receive(:all).with('ham_sandwich' => 'open faced', 'category' => 'sandwiches').and_return(['wakka'])
-    DataMapperTestIdentity.locate('ham_sandwich' => 'open faced', 'category' => 'sandwiches').should == 'wakka'
+  describe 'model', type: :model do
+    subject { DataMapperTestIdentity }
+
+    it 'should delegate locate to the all query method' do
+      allow(subject).to receive(:all).with('ham_sandwich' => 'open faced', 'category' => 'sandwiches').and_return(['wakka'])
+      expect(subject.locate('ham_sandwich' => 'open faced', 'category' => 'sandwiches')).to eq('wakka')
+    end
   end
 end
