@@ -1,4 +1,8 @@
 /coverage
 /pkg
 /doc
+
 Gemfile.lock
+
+.ruby-version
+.ruby-gemset
