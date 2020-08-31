@@ -1,17 +1,53 @@
-# OmniAuth Identity
+# OmniAuth Identity2 (fork of omniauth-identity)
 
-The OmniAuth Identity gem provides a way for applications to utilize a
+The OmniAuth Identity2 gem provides a way for applications to utilize a
 traditional login/password based authentication system without the need
 to give up the simple authentication flow provided by OmniAuth. Identity
 is designed on purpose to be as featureless as possible: it provides the
 basic construct for user management and then gets out of the way.
+
+## Note about this fork
+
+The official `omniauth-identity` gem has gone stale. With no disrespect 
+to the maintainers who have generously volunteered their time and energy, 
+they appear to have moved on and are not responding to issues and pull 
+requests, or offers to add additional maintainers to the main project.
+
+Whilst the original `omniauth-identity` still *works* per se, primiarly 
+because it's relatively small and simple piece of code, there are 
+inevitably small issues that need attending to, especially security updates 
+to dependencies.
+
+Therefore, the goal of this repository is to create a new home for a modern, 
+yet **compatible** version of the identity strategy, where issues can be raised 
+and addressed, and contributions welcome.
+
+The new name of **omniauth-identity2** is to allow for the code to be distributed
+via RubyGems, whilst being familiar enough so that developers will realise
+that it's an up-to-date version of the `omniauth-identity` gem.
+
+
+### Compatibility with omniauth-identity
+
+The goal is to maintain backward compatibility as closely as possible so that 
+developers need only change a single entry in their gemfile to 
+`omniauth-identity2` and existing code will work.
+
+However, the Ruby ecosystem has evolved since 2010 when the upstream repo was 
+created and there instances where it may be necessary to drop support for
+integrations that are no longer maintained. For example, MongoMapper integration
+has been removed from this gem.
+
+If and when new features are added they will be labelled as omniauth-identity2 
+specific.
+
 
 ## Usage
 
 This can be a bit hard to understand the first time. Luckily, Ryan Bates made
 a [Railscast](http://railscasts.com/episodes/304-omniauth-identity) about it!
 
-You use `omniauth-identity` just like you would any other OmniAuth provider: as a
+You use `omniauth-identity2` just like you would any other OmniAuth provider: as a
 Rack middleware. The basic setup for a email/password authentication would
 look something like this:
 
@@ -60,19 +96,12 @@ end
 
 ### MongoMapper
 
-Include the `OmniAuth::Identity::Models::MongoMapper` mixin and specify
-fields that you will need.
+Unfortunately MongoMapper is **not supported** in `omniauth-identity2` as a result of it 
+not being maintained for several years.
 
-```ruby
-class Identity
-  include MongoMapper::Document
-  include OmniAuth::Identity::Models::MongoMapper
-
-  key :email, String
-  key :name, String
-  key :password_digest, String
-end
-```
+It wasn't possible to include Mongoid *and* MongoMapper due to incompatible gem version 
+requirements. Therefore precedence was given to Mongoid as it is significantly more 
+popular and actively maintained. 
 
 ### DataMapper
 
@@ -207,4 +236,5 @@ MIT License. See LICENSE for details.
 
 ## Copyright
 
+Copyright (c) 2020- Andrew Roberts, and Jellybooks Ltd.
 Copyright (c) 2010-2015 Michael Bleigh, and Intridea, Inc.
